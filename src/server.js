@@ -7,6 +7,7 @@ const connect = require("./db");
 
 const userRouter = require("./routes/user");
 const supplierRouter = require("./routes/supplier");
+const customerRouter = require("./routes/customer");
 const materialRouter = require("./routes/material");
 // const stockRouter = require("./routes/stock");
 
@@ -27,6 +28,7 @@ app.use(morgan("dev"));
 
 app.use("/user", userRouter);
 app.use("/supplier", supplierRouter);
+app.use("/customer", customerRouter);
 app.use("/material", materialRouter);
 // app.use("/stock", stockRouter);
 
