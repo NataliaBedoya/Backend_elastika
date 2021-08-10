@@ -6,8 +6,6 @@ const emailRegex =
 
 const userSchema = new Schema(
   {
-    //dni: Number,
-    // dniType: String,
     name: {
       type: String,
       required: [true, "El campo nombre es requerido"],
@@ -34,30 +32,11 @@ const userSchema = new Schema(
         },
       ],
     },
-    // address: {
-    //   type: String,
-    //   required: [true, "El campo dirección es requerido"],
-    // },
-    // neighborhood: String,
-    // phone: {
-    //   type: String,
-    //   required: [true, "El campo teléfono es requerido"],
-    // },
-    // height: Number,
-    // weight: Number,
-    // active: Boolean,
+
     password: {
       type: String,
       required: [true, "El campo contraseña es requerido"],
     },
-    // profilePicture: {
-    //   type: String,
-    //   default:
-    //     "https://res.cloudinary.com/mashcol/image/upload/v1626054119/crossfitapp-profileImages/john-doe_lny628.png",
-    // },
-    // wods: {
-    //   type: [{ type: Schema.Types.ObjectId, ref: "Wod" }],
-    // },
   },
   {
     timestamps: true,
