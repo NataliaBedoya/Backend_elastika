@@ -6,8 +6,13 @@ const materialSchema = new Schema(
       type: String,
       required: [true, "El campo nombre del material es requerido"],
     },
+
     description: {
       type: String,
+    },
+
+    stock: {
+      type: [{ type: Schema.Types.ObjectId, ref: "Stock" }],
     },
   },
   {

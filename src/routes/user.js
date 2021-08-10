@@ -1,12 +1,10 @@
 const router = require("express").Router();
 const userController = require("../controllers/user.controller");
-//const { auth, formData, userFilter } = require("../utils/middlewares");
+const { auth } = require("../utils/middlewares.js");
 
-router.route("/create").post(userController.create);
-router.route("/list").get(userController.list);
-router.route("/:userId").put(userController.update);
-//router.route("/update").put(userController.update);
-router.route("/:userId").delete(userController.destroy);
-//router.route("/delete").delete(userController.destroy);
+router.route("/signin").post(userController.signin);
+router.route("/userList").get(userController.list);
+router.route("/userDelete").delete(userController.destroy);
+router.route("/signup").post(userController.signup);
 
 module.exports = router;
