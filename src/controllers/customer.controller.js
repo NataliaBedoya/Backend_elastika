@@ -3,7 +3,7 @@ const Customer = require("../models/customer.model");
 module.exports = {
   async list(req, res) {
     try {
-      const customers = await Customer.find();
+      const customers = await Customer.find({}).sort({ name: 1 });
       res.status(200).json(customers);
     } catch (error) {
       res.status(400).json({ message: error.message });

@@ -3,7 +3,7 @@ const Supplier = require("../models/supplier.model");
 module.exports = {
   async list(req, res) {
     try {
-      const suppliers = await Supplier.find();
+      const suppliers = await Supplier.find({}).sort({ name: 1 });
       res.status(200).json(suppliers);
     } catch (error) {
       res.status(400).json({ message: error.message });
