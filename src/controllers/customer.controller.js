@@ -61,7 +61,6 @@ module.exports = {
   async deleteContact(req, res) {
     try {
       const { customerId } = req.body;
-      console.log(customerId);
       const customer = await Customer.findById(customerId);
       customer.contact2 = null;
       customer.email2 = null;
