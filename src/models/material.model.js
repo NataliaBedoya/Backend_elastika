@@ -19,6 +19,9 @@ const materialSchema = new Schema(
     stock: {
       type: [{ type: Schema.Types.ObjectId, ref: "Stock" }],
     },
+    commit: {
+      type: [{ type: Schema.Types.ObjectId, ref: "Commit" }],
+    },
   },
   {
     timestamps: true,

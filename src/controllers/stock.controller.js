@@ -11,7 +11,14 @@ module.exports = {
         amountInStock,
         material: materialId,
       });
+
       const stock2 = await Stock.findById(stock._id).populate("material");
+
+      await Material.updateOne(
+        { _id: materialId },
+        { $addToSet: { stock: stock._id } }
+      );
+
       res.status(201).json(stock2);
     } catch (error) {
       res.status(400).json({ message: error.message });
