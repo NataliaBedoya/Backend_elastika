@@ -16,9 +16,9 @@ const materialSchema = new Schema(
       required: [true, "El campo umbral del material es requerido"],
     },
 
-    // stock: {
-    //   type: [{ type: Schema.Types.ObjectId, ref: "Stock" }],
-    // },
+    stock: {
+      type: [{ type: Schema.Types.ObjectId, ref: "Stock" }],
+    },
   },
   {
     timestamps: true,
