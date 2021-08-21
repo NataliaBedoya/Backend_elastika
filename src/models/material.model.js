@@ -22,6 +22,9 @@ const materialSchema = new Schema(
     commit: {
       type: [{ type: Schema.Types.ObjectId, ref: "Commit" }],
     },
+    transit: {
+      type: [{ type: Schema.Types.ObjectId, ref: "Transit" }],
+    },
   },
   {
     timestamps: true,
