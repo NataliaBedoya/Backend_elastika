@@ -5,28 +5,28 @@ const commitSchema = new Schema(
     material: {
       type: Schema.Types.ObjectId,
       ref: "Material",
-      required: [true, "El campo nombre del material es requerido"],
+      required: [true, "Material name is required"],
     },
     amount: {
       type: Number,
-      required: [true, "El campo cantidad del material es requerido"],
+      required: [true, "Material amount is required"],
     },
     customer: {
       type: Schema.Types.ObjectId,
       ref: "Customer",
-      required: [true, "El campo cliente es obligatorio"],
+      required: [true, "Customer name is required"],
     },
     order: {
       type: String,
-      required: [true, "El campo orden de compra del material es requerido"],
+      required: [true, "Purchase order is required"],
     },
     assignmentDate: {
       type: Date,
-      required: [true, "El campo fecha de asignación es requerido"],
+      required: [true, "Assignment date is required"],
     },
     deliveryDate: {
       type: Date,
-      required: [true, "El campo fecha de despacho es requerido"],
+      required: [true, "Delivery date is required"],
     },
     notes: String,
   },

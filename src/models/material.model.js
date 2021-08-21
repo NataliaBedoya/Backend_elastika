@@ -4,7 +4,7 @@ const materialSchema = new Schema(
   {
     name: {
       type: String,
-      required: [true, "El campo nombre del material es requerido"],
+      required: [true, "Material name is required"],
     },
 
     description: {
@@ -13,7 +13,7 @@ const materialSchema = new Schema(
 
     threshold: {
       type: Number,
-      required: [true, "El campo umbral del material es requerido"],
+      required: [true, "Material threshold is required"],
     },
 
     stock: {

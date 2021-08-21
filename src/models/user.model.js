@@ -8,17 +8,17 @@ const userSchema = new Schema(
   {
     name: {
       type: String,
-      required: [true, "El campo nombre es requerido"],
+      required: [true, "User name is required"],
     },
     lastname: {
       type: String,
-      required: [true, "El campo apellido es requerido"],
+      required: [true, "User lastname is required"],
     },
     role: String,
     email: {
       type: String,
-      required: [true, "El campo email es requerido"],
-      match: [emailRegex, "Email invalido"],
+      required: [true, "User email is required"],
+      match: [emailRegex, "Invalid email"],
       validate: [
         {
           validator(email) {
@@ -31,14 +31,14 @@ const userSchema = new Schema(
               })
               .catch(() => false);
           },
-          message: "El correo está en uso",
+          message: "The email is already in use",
         },
       ],
     },
 
     password: {
       type: String,
-      required: [true, "El campo contraseña es requerido"],
+      required: [true, "Password is required"],
     },
   },
   {

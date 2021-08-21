@@ -11,14 +11,11 @@ module.exports = {
         amountInStock,
         material: materialId,
       });
-
       const stock2 = await Stock.findById(stock._id).populate("material");
-
       await Material.updateOne(
         { _id: materialId },
         { $addToSet: { stock: stock._id } }
       );
-
       res.status(201).json(stock2);
     } catch (error) {
       res.status(400).json({ message: error.message });
@@ -38,16 +35,6 @@ module.exports = {
     }
   },
 
-  async destroy(req, res) {
-    try {
-      const { batchId } = req.body;
-      const stock = await Stock.findByIdAndDelete(batchId);
-      res.status(200).json(stock);
-    } catch (error) {
-      res.status(400).json({ message: error.message });
-    }
-  },
-
   async update(req, res) {
     try {
       const { batchId, amountInStock } = req.body;
@@ -59,6 +46,16 @@ module.exports = {
       res.status(200).json(stock);
     } catch (error) {
       res.status(500).json({ message: error.message });
+    }
+  },
+
+  async destroy(req, res) {
+    try {
+      const { batchId } = req.body;
+      const stock = await Stock.findByIdAndDelete(batchId);
+      res.status(200).json(stock);
+    } catch (error) {
+      res.status(400).json({ message: error.message });
     }
   },
 };

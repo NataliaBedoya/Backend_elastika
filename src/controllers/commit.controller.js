@@ -24,7 +24,6 @@ module.exports = {
         notes,
         material: materialId,
       });
-
       const commit2 = await Commit.findById(commit._id)
         .populate("material")
         .populate("customer");

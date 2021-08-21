@@ -5,11 +5,12 @@ const stockSchema = new Schema(
     material: {
       type: Schema.Types.ObjectId,
       ref: "Material",
-      required: [true, "El campo nombre del material es requerido"],
+      required: [true, "Material name is required"],
     },
 
     batch: {
       type: String,
+      required: [true, "Batch ID is required"],
     },
 
     amountInStock: {

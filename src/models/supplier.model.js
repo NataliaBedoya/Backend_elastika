@@ -8,20 +8,20 @@ const supplierSchema = new Schema(
     dni: String,
     name: {
       type: String,
-      required: [true, "El campo nombre es requerido"],
+      required: [true, "Supplier name is required"],
     },
     contact1: {
       type: String,
-      required: [true, "El campo contacto es requerido"],
+      required: [true, "Contact name is required"],
     },
     email1: {
       type: String,
-      required: [true, "El campo email es requerido"],
-      match: [emailRegex, "Email invalido"],
+      required: [true, "Contact email is required"],
+      match: [emailRegex, "Invalid email"],
     },
     phone1: {
       type: String,
-      required: [true, "El campo teléfono es requerido"],
+      required: [true, "Contact phone is required"],
     },
     country: {
       type: String,
