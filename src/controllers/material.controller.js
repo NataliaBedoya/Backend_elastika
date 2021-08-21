@@ -24,8 +24,13 @@ module.exports = {
   async list(req, res) {
     try {
       const materials = await Material.find()
+        .populate("stock")
+        .populate("customer")
         .collation({ locale: "es" })
         .sort({ name: 1 });
+
+      console.log(materials);
+
       res.status(200).json(materials);
     } catch (error) {
       res.status(400).json({ message: error.message });
