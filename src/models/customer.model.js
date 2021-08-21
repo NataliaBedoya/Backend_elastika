@@ -10,6 +10,7 @@ const customerSchema = new Schema(
       type: String,
       required: [true, "El campo nombre es requerido"],
     },
+    businessPhone: String,
     contact1: {
       type: String,
       required: [true, "El campo contacto es requerido"],
@@ -23,6 +24,12 @@ const customerSchema = new Schema(
       type: String,
       required: [true, "El campo teléfono es requerido"],
     },
+    contact2: String,
+    email2: {
+      type: String,
+      match: [emailRegex, "Email invalido"],
+    },
+    phone1: String,
   },
   {
     timestamps: true,

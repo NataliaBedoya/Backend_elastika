@@ -1,7 +1,6 @@
 const User = require("../models/user.model");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
-//const { welcome } = require("../utils/mailer");
 
 module.exports = {
   async signin(req, res) {
@@ -19,7 +18,6 @@ module.exports = {
       const token = jwt.sign({ userId: user._id }, process.env.SECRET, {
         expiresIn: 60 * 60 * 24 * 365,
       });
-
       res.status(201).json({
         token,
       });
@@ -30,7 +28,10 @@ module.exports = {
 
   async list(req, res) {
     try {
-      const users = await User.find({}).select({ password: 0 });
+      const users = await User.find({})
+        .select({ password: 0 })
+        .collation({ locale: "es" })
+        .sort({ name: 1 });
       res.status(200).json(users);
     } catch (error) {
       res.status(400).json({ message: error.message });
@@ -41,7 +42,6 @@ module.exports = {
     try {
       const { userId } = req.body;
       const user = await User.findByIdAndDelete(userId);
-      console.log(userId);
       res.status(200).json(user);
     } catch (error) {
       res.status(400).json({ message: error.message });
@@ -52,15 +52,37 @@ module.exports = {
     try {
       const { body } = req;
       const user = await User.create(body);
-
       const token = jwt.sign({ userId: user._id }, process.env.SECRET, {
         expiresIn: 60 * 60 * 24 * 365,
       });
-      //await welcome(user);
-
       res.status(201).json({ token });
     } catch (error) {
       res.status(400).json({ message: error.message });
+    }
+  },
+
+  async update(req, res) {
+    try {
+      const { userId, body } = req;
+
+      const user = await User.findById(userId);
+      if (req.body.password !== "") {
+        user.password = req.body.password;
+      }
+      if (req.body.name !== "") {
+        user.name = req.body.name;
+      }
+      if (req.body.lastname !== "") {
+        user.lastname = req.body.lastname;
+      }
+      if (req.body.role !== "") {
+        user.role = req.body.role;
+      }
+      await user.save();
+
+      res.status(200).json(user);
+    } catch (error) {
+      res.status(500).json({ message: error.message });
     }
   },
 };

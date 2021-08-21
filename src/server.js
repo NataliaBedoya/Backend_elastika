@@ -9,7 +9,9 @@ const userRouter = require("./routes/user");
 const supplierRouter = require("./routes/supplier");
 const customerRouter = require("./routes/customer");
 const materialRouter = require("./routes/material");
-// const stockRouter = require("./routes/stock");
+const stockRouter = require("./routes/stock");
+const commitRouter = require("./routes/commit");
+const transitRouter = require("./routes/transit");
 
 const { auth } = require("./utils/middlewares.js");
 
@@ -30,7 +32,9 @@ app.use("/user", userRouter);
 app.use("/supplier", supplierRouter);
 app.use("/customer", customerRouter);
 app.use("/material", materialRouter);
-// app.use("/stock", stockRouter);
+app.use("/stock", stockRouter);
+app.use("/commit", commitRouter);
+app.use("/transit", transitRouter);
 
 app.get("/", auth, (req, res) => {
   res.status(200).json({ message: "estás autenticado" });

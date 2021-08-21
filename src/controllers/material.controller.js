@@ -11,26 +11,27 @@ module.exports = {
     }
   },
 
-  async list(req, res) {
+  async show(req, res) {
     try {
-      const materials = await Material.find();
-      res.status(200).json(materials);
-    } catch (error) {
-      res.status(400).json({ message: error.message });
+      const { materialId } = req.body;
+      const material = await Material.findById(materialId);
+      res.status(200).json(material);
+    } catch (err) {
+      res.status(400).json({ message: err.message });
     }
   },
 
-  async update(req, res) {
+  async list(req, res) {
     try {
-      // const { materialId, body } = req;
-      const {
-        params: { materialId },
-        body,
-      } = req;
-      const material = await Material.findByIdAndUpdate(materialId, body, {
-        new: true,
-      });
-      res.status(200).json(material);
+      const materials = await Material.find()
+        .populate("stock")
+        .populate("customer")
+        .collation({ locale: "es" })
+        .sort({ name: 1 });
+
+      console.log(materials);
+
+      res.status(200).json(materials);
     } catch (error) {
       res.status(400).json({ message: error.message });
     }
@@ -38,8 +39,7 @@ module.exports = {
 
   async destroy(req, res) {
     try {
-      //const { materialId } = req;
-      const { materialId } = req.params;
+      const { materialId } = req.body;
       const material = await Material.findByIdAndDelete(materialId);
       res.status(200).json(material);
     } catch (error) {
@@ -47,13 +47,17 @@ module.exports = {
     }
   },
 
-  // async show(req, res) {
-  //   try {
-  //     const { userId } = req;
-  //     const user = await User.findById(userId);
-  //     res.status(200).json(user);
-  //   } catch (error) {
-  //     res.status(400).json({ message: error.message });
-  //   }
-  // },
+  async update(req, res) {
+    try {
+      const { materialId, threshold } = req.body;
+      const material = await Material.findById(materialId);
+      if (req.body.threshold !== "") {
+        material.threshold = req.body.threshold;
+      }
+      await material.save();
+      res.status(200).json(material);
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
+  },
 };

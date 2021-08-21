@@ -23,6 +23,12 @@ const supplierSchema = new Schema(
       type: String,
       required: [true, "El campo teléfono es requerido"],
     },
+    country: {
+      type: String,
+    },
+    city: {
+      type: String,
+    },
   },
   {
     timestamps: true,

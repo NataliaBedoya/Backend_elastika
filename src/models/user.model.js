@@ -24,7 +24,10 @@ const userSchema = new Schema(
           validator(email) {
             return models.User.findOne({ email })
               .then((user) => {
-                return !user;
+                if (!user || user._id.equals(this._id)) {
+                  return true;
+                }
+                return false;
               })
               .catch(() => false);
           },
@@ -43,8 +46,10 @@ const userSchema = new Schema(
   }
 );
 
-userSchema.pre("save", async function () {
+userSchema.pre("save", async function (next) {
+  console.log("save");
   if (this.password && this.isModified("password")) {
+    console.log("if");
     this.password = await bcrypt.hash(this.password, 8);
   }
 });

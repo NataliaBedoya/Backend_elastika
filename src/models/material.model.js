@@ -11,8 +11,19 @@ const materialSchema = new Schema(
       type: String,
     },
 
+    threshold: {
+      type: Number,
+      required: [true, "El campo umbral del material es requerido"],
+    },
+
     stock: {
       type: [{ type: Schema.Types.ObjectId, ref: "Stock" }],
+    },
+    commit: {
+      type: [{ type: Schema.Types.ObjectId, ref: "Commit" }],
+    },
+    transit: {
+      type: [{ type: Schema.Types.ObjectId, ref: "Transit" }],
     },
   },
   {

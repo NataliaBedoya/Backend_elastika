@@ -11,7 +11,7 @@ exports.auth = (req, res, next) => {
     const [_, token] = authorization.split(" ");
 
     if (!token) {
-      throw new Error("Su sesión expiró");
+      throw new Error("Su sesión expirsó");
     }
 
     const { userId } = jwt.verify(token, process.env.SECRET);
