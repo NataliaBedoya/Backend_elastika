@@ -30,6 +30,9 @@ const customerSchema = new Schema(
       match: [emailRegex, "Invalid email"],
     },
     phone1: String,
+    commit: {
+      type: [{ type: Schema.Types.ObjectId, ref: "Commit" }],
+    },
   },
   {
     timestamps: true,

@@ -15,7 +15,8 @@ module.exports = {
     try {
       const customers = await Customer.find()
         .collation({ locale: "es" })
-        .sort({ name: 1 });
+        .sort({ name: 1 })
+        .populate({ path: "commit", select: "order" });
       res.status(200).json(customers);
     } catch (error) {
       res.status(400).json({ message: error.message });
