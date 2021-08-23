@@ -11,15 +11,15 @@ module.exports = {
     }
   },
 
-  async show(req, res) {
-    try {
-      const { materialId } = req.body;
-      const material = await Material.findById(materialId);
-      res.status(200).json(material);
-    } catch (err) {
-      res.status(400).json({ message: err.message });
-    }
-  },
+  // async show(req, res) {
+  //   try {
+  //     const { materialId } = req.body;
+  //     const material = await Material.findById(materialId);
+  //     res.status(200).json(material);
+  //   } catch (err) {
+  //     res.status(400).json({ message: err.message });
+  //   }
+  // },
 
   async list(req, res) {
     try {
@@ -28,20 +28,7 @@ module.exports = {
         .populate("customer")
         .collation({ locale: "es" })
         .sort({ name: 1 });
-
-      console.log(materials);
-
       res.status(200).json(materials);
-    } catch (error) {
-      res.status(400).json({ message: error.message });
-    }
-  },
-
-  async destroy(req, res) {
-    try {
-      const { materialId } = req.body;
-      const material = await Material.findByIdAndDelete(materialId);
-      res.status(200).json(material);
     } catch (error) {
       res.status(400).json({ message: error.message });
     }
@@ -58,6 +45,16 @@ module.exports = {
       res.status(200).json(material);
     } catch (error) {
       res.status(500).json({ message: error.message });
+    }
+  },
+
+  async destroy(req, res) {
+    try {
+      const { materialId } = req.body;
+      const material = await Material.findByIdAndDelete(materialId);
+      res.status(200).json(material);
+    } catch (error) {
+      res.status(400).json({ message: error.message });
     }
   },
 };

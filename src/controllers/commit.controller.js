@@ -24,7 +24,6 @@ module.exports = {
         notes,
         material: materialId,
       });
-
       const commit2 = await Commit.findById(commit._id)
         .populate("material")
         .populate("customer");
@@ -49,7 +48,7 @@ module.exports = {
       const commits = await Commit.find({ materialName: materialId })
         .collation({ locale: "es" })
         .sort({ name: 1 })
-        .populate("material.name")
+        .populate({ path: "material", select: "name" })
         .populate({ path: "customer", select: "name" });
       res.status(200).json(commits);
     } catch (error) {

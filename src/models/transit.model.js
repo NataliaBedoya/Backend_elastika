@@ -4,38 +4,38 @@ const transitSchema = new Schema(
   {
     order: {
       type: String,
-      required: [true, "El campo orden de compra del material es requerido"],
+      required: [true, "Purchase order is required"],
     },
     orderDate: {
       type: Date,
-      required: [true, "El campo fecha de orden de compra es requerido"],
+      required: [true, "Order date is required"],
     },
     supplier: {
       type: Schema.Types.ObjectId,
       ref: "Supplier",
-      required: [true, "El campo supplier es requerido"],
+      required: [true, "Supplier name is required"],
     },
     material: {
       type: Schema.Types.ObjectId,
       ref: "Material",
-      required: [true, "El campo nombre del material es requerido"],
+      required: [true, "Material name is required"],
     },
     amount: {
       type: Number,
-      required: [true, "El campo cantidad del material es requerido"],
+      required: [true, "Material amount is required"],
     },
-    transactionType: String,
+    transactionType: {
+      type: String,
+      required: [true, "Transaction type is required"],
+    },
     shipmentDate: {
       type: Date,
-      //required: [true, "El campo fecha de embarque es requerido"],
     },
     arrivalDate: {
       type: Date,
-      //required: [true, "El campo fecha de despacho es requerido"],
     },
     releaseDate: {
       type: Date,
-      //required: [true, "El campo fecha de habilitación es requerido"],
     },
     notes: String,
   },

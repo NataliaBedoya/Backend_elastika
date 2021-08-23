@@ -17,7 +17,6 @@ module.exports = {
         releaseDate,
         notes,
       } = req.body;
-
       const material = await Material.findById(materialId);
       const transit = await Transit.create({
         order,
@@ -31,7 +30,6 @@ module.exports = {
         releaseDate,
         notes,
       });
-
       const transit2 = await Transit.findById(transit._id)
         .populate("material")
         .populate("supplier");
