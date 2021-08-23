@@ -1,6 +1,7 @@
 const Supplier = require("../models/supplier.model");
 
 module.exports = {
+
   async create(req, res) {
     try {
       const { body } = req;
@@ -16,13 +17,14 @@ module.exports = {
       const suppliers = await Supplier.find()
         .collation({ locale: "es" })
         .sort({ name: 1 });
+
       res.status(200).json(suppliers);
     } catch (error) {
       res.status(400).json({ message: error.message });
     }
   },
 
-  async update(req, res) {
+ async update(req, res) {
     try {
       const { supplierId, contact1, email1, phone1 } = req.body;
       const supplier = await Supplier.findById(supplierId);
@@ -49,6 +51,7 @@ module.exports = {
       res.status(200).json(supplier);
     } catch (error) {
       res.status(400).json({ message: error.message });
+
     }
   },
 };

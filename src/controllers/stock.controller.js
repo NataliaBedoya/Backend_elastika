@@ -17,10 +17,12 @@ module.exports = {
         { $addToSet: { stock: stock._id } }
       );
       res.status(201).json(stock2);
+
     } catch (error) {
       res.status(400).json({ message: error.message });
     }
   },
+
 
   async list(req, res) {
     try {
@@ -53,6 +55,7 @@ module.exports = {
     try {
       const { batchId } = req.body;
       const stock = await Stock.findByIdAndDelete(batchId);
+
       res.status(200).json(stock);
     } catch (error) {
       res.status(400).json({ message: error.message });

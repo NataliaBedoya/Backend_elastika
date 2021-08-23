@@ -2,6 +2,7 @@ const { Schema, model, models } = require("mongoose");
 
 const stockSchema = new Schema(
   {
+
     material: {
       type: Schema.Types.ObjectId,
       ref: "Material",
@@ -15,6 +16,7 @@ const stockSchema = new Schema(
 
     amountInStock: {
       type: Number,
+
     },
   },
   {

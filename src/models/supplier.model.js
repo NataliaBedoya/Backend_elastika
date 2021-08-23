@@ -5,6 +5,7 @@ const emailRegex =
 
 const supplierSchema = new Schema(
   {
+
     dni: String,
     name: {
       type: String,
@@ -28,6 +29,7 @@ const supplierSchema = new Schema(
     },
     city: {
       type: String,
+
     },
   },
   {
