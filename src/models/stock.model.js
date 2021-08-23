@@ -2,22 +2,21 @@ const { Schema, model, models } = require("mongoose");
 
 const stockSchema = new Schema(
   {
-    name: {
+
+    material: {
       type: Schema.Types.ObjectId,
       ref: "Material",
-      required: [true, "El campo nombre del material es requerido"],
+      required: [true, "Material name is required"],
     },
-    type: {
-      type: String,
-      required: [true, "El campo tipo de material es requerido"],
-    },
+
     batch: {
       type: String,
-      required: [true, "El lote de material es requerido"],
+      required: [true, "Batch ID is required"],
     },
+
     amountInStock: {
       type: Number,
-      required: [true, "La cantidad de material es requerido"],
+
     },
   },
   {
