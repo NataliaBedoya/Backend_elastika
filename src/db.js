@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 function connect() {
   const mongoURI =
     process.env.MONGO_URI || "mongodb://localhost:27017/elastika";
+
   const options = {
     useNewUrlParser: true,
     useUnifiedTopology: true,

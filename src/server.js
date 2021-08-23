@@ -2,7 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const morgan = require("morgan");
-//const connect = require("./db");
+const connect = require("./db");
 
 const userRouter = require("./routes/user");
 const supplierRouter = require("./routes/supplier");
@@ -21,7 +21,7 @@ connect();
 app.use(express.json());
 app.use(
   cors({
-    //origin: process.env.FRONTEND_URL,
+    origin: process.env.FRONTEND_URL,
   })
 );
 app.use(morgan("dev"));
