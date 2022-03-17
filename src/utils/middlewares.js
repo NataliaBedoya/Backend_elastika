@@ -9,7 +9,7 @@ exports.auth = (req, res, next) => {
     }
     const [_, token] = authorization.split(" ");
     if (!token) {
-      throw new Error("Su sesión expirsó");
+      throw new Error("Su sesión expiró");
     }
     const { userId } = jwt.verify(token, process.env.SECRET);
     req.userId = userId;

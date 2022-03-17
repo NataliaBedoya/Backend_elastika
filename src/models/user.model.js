@@ -14,7 +14,10 @@ const userSchema = new Schema(
       type: String,
       required: [true, "User lastname is required"],
     },
-    role: String,
+    role: {
+      type: String,
+      required: [true, "User role is required"],
+    },
     email: {
       type: String,
       required: [true, "User email is required"],
@@ -47,9 +50,7 @@ const userSchema = new Schema(
 );
 
 userSchema.pre("save", async function (next) {
-  console.log("save");
   if (this.password && this.isModified("password")) {
-    console.log("if");
     this.password = await bcrypt.hash(this.password, 8);
   }
 });

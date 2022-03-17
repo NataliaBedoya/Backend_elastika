@@ -35,7 +35,7 @@ app.use("/commit", commitRouter);
 app.use("/transit", transitRouter);
 
 app.get("/", auth, (req, res) => {
-  res.status(200).json({ message: "estás autenticado" });
+  res.status(200).json({ message: "You are authenticated" });
 });
 
 app.listen(port, () => {

@@ -15,10 +15,10 @@ module.exports = {
       if (!isValid) {
         throw new Error("Contraseña o correo invalido");
       }
-      const token = jwt.sign({ userId: user._id }, process.env.SECRET, {
-        expiresIn: 60 * 60 * 24 * 365,
+      const token = jwt.sign({ userId: user._id, role: user.role }, process.env.SECRET, {
+        expiresIn: '2d',
       });
-      res.status(201).json({
+      res.status(200).json({
         token,
       });
     } catch (error) {
@@ -30,10 +30,10 @@ module.exports = {
     try {
       const { body } = req;
       const user = await User.create(body);
-      const token = jwt.sign({ userId: user._id }, process.env.SECRET, {
-        expiresIn: 60 * 60 * 24 * 365,
+      const token = jwt.sign({ userId: user._id, role: user.role }, process.env.SECRET, {
+        expiresIn: '2d',
       });
-      res.status(201).json({ token, user });
+      res.status(200).json({ token, user });
     } catch (error) {
       res.status(400).json({ message: error.message });
     }
@@ -53,20 +53,20 @@ module.exports = {
 
   async update(req, res) {
     try {
-      const { userId, body } = req;
+      const { body } = req;
 
-      const user = await User.findById(userId);
-      if (req.body.password !== "") {
-        user.password = req.body.password;
+      const user = await User.findById(body.userId);
+      if (body.email !== "") {
+        user.email = body.email;
       }
-      if (req.body.name !== "") {
-        user.name = req.body.name;
+      if (body.name !== "") {
+        user.name = body.name;
       }
-      if (req.body.lastname !== "") {
-        user.lastname = req.body.lastname;
+      if (body.lastname !== "") {
+        user.lastname = body.lastname;
       }
-      if (req.body.role !== "") {
-        user.role = req.body.role;
+      if (body.role !== "") {
+        user.role = body.role;
       }
       await user.save();
 

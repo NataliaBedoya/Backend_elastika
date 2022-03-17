@@ -4,20 +4,21 @@ const Material = require("../models/material.model");
 module.exports = {
   async create(req, res) {
     try {
-      const { batch, amountInStock, materialId } = req.body;
+      const { batch, amountInStock = 0, materialId } = req.body;
       const material = await Material.findById(materialId);
-      const stock = await Stock.create({
-        batch,
-        amountInStock,
-        material: materialId,
-      });
-      const stock2 = await Stock.findById(stock._id).populate("material");
-      await Material.updateOne(
-        { _id: materialId },
-        { $addToSet: { stock: stock._id } }
-      );
-      res.status(201).json(stock2);
-
+      if(material) {
+        const stock = await Stock.create({
+          batch,
+          amountInStock,
+          material: materialId,
+        });
+        const stock2 = await Stock.findById(stock._id).populate("material");
+        await Material.updateOne(
+          { _id: materialId },
+          { $addToSet: { stock: stock._id } }
+        );
+        res.status(201).json(stock2);
+      }
     } catch (error) {
       res.status(400).json({ message: error.message });
     }
@@ -26,8 +27,7 @@ module.exports = {
 
   async list(req, res) {
     try {
-      const { materialId } = req.body;
-      const stocks = await Stock.find({ materialName: materialId })
+      const stocks = await Stock.find()
         .collation({ locale: "es" })
         .sort({ name: 1 })
         .populate("material.name");

@@ -16,7 +16,6 @@ const stockSchema = new Schema(
 
     amountInStock: {
       type: Number,
-
     },
   },
   {
