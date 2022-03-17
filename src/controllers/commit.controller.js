@@ -44,8 +44,7 @@ module.exports = {
 
   async list(req, res) {
     try {
-      const { materialId } = req.body;
-      const commits = await Commit.find({ materialName: materialId })
+      const commits = await Commit.find()
         .collation({ locale: "es" })
         .sort({ name: 1 })
         .populate({ path: "material", select: "name" })
